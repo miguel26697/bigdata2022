@@ -4,18 +4,11 @@ condados = []
 ciudades = []
 for line in sys.stdin:
     datos = line.split(",")
-    condados.append(datos[8])
-    ciudades.append(datos[6])
-
-ciudades.pop(0)
-condados.pop(0)
-
-for i in range(len(ciudades)):
-    ciudades[i] = ciudades[i].replace(" ", "")
-
-for i in range(len(condados)):
-    condados[i] = condados[i].replace(" ", "")
-
-
-for condado, ciudad in zip(condados, ciudades):
-    print(str(condado) + "\t" + str(ciudad) + "\t" + str(1))
+    condados = None
+    ciudades = None
+    if datos[6] != "Town/City":
+        ciudades = datos[6]
+    if datos[8] != "County":
+        condados = datos[8]
+    if condados != None and ciudades != None:
+        print(str(condados) + "\t" + str(ciudades) + "\t" + str(1))

@@ -1,18 +1,15 @@
                                                                                                  
 import sys
 
-precios=[]
-ciudades = []
+
 for line in sys.stdin:
         datos = line.split(",")
-        precios.append(datos[1])
-        ciudades.append(datos[6])
+        precios = None
+        ciudades = None
+        if datos[1] != "Price":
+                precios = datos[1]
+        if datos[6] != "Town/City":
+                ciudades = datos[6]
+        if precios != None and ciudades != None:
+                print (str(ciudades)+"\t"+str(1)+"\t"+str(precios))
 
-ciudades.pop(0)
-precios.pop(0)
-
-for i in range(len(ciudades)):
-         ciudades[i]=ciudades[i].replace(" ", "")
-
-for ciudad, precio in zip(ciudades,precios):
-         print (str(ciudad)+"\t"+str(1)+"\t"+str(precio))

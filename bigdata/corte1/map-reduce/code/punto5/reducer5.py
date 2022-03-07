@@ -31,3 +31,5 @@ for line in sys.stdin:
         current_value = value
         mayor = value
         mes_ganador = mes
+
+print(str(current_key) + "\t" + str(mes_ganador) + "\t" + str(mayor))

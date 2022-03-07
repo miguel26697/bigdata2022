@@ -5,7 +5,7 @@ current_value = 0
 current_precio = 0
 
 for line in sys.stdin:
-        key, value, precio = line.split(" ")
+        key, value, precio = line.split("\t")
         value = int(value)
         precio = int(precio)
         if current_key == None:

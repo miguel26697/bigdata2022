@@ -4,19 +4,13 @@ precios = []
 fechas = []
 for line in sys.stdin:
     datos = line.split(",")
-    precios.append(datos[1])
-    fechas.append(datos[2])
+    precios = None
+    fechas = None
+    if datos[1] != "Price":
+        precios = datos[1]
+    if datos[2] != "Date of Transfer":
+        fechas = datos[2]
+    if precios != None  and fechas != None:
+        años = fechas.split("-")
+        print(str(años[0]) + "\t" + str(años[1]) + "\t" + str(1))
 
-fechas.pop(0)
-precios.pop(0)
-
-años = []
-meses = []
-
-for date in fechas:
-    dates = date.split("-")
-    años.append(dates[0])
-    meses.append(dates[1])
-
-for año, mes in zip(años, meses):
-    print(str(año) + "\t" + str(mes) + "\t" + str(1))
