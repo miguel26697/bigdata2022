@@ -20,7 +20,7 @@ for line in sys.stdin:
             mes_actual = mes
             current_value = value
 
-        if mayor <= current_value:
+        if mayor < current_value:
             mayor = current_value
             mes_ganador = mes
 
