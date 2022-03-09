@@ -16,4 +16,4 @@ for line in sys.stdin:
         if precios != None and ciudades != None and fechas != None:
                 años = fechas.split("-")
                 if años [0] == "2015" and ciudades == "STAMFORD":
-                 print (str(ciudades) + "\t"+ str(1) + "\t" + str(precios) + "\t" + str(años[0]))
+                  print (str(precios) + "\t"+ str(1) + "\t" + str(ciudades) + "\t" + str(años[0]))
