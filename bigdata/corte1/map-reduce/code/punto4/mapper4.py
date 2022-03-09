@@ -18,4 +18,4 @@ for line in sys.stdin:
                         if datos[1] != "Price":
                                 precios = datos[1]
                                 precios = int(precios)
-                                print (str(precios) + "\t"+ str(1) + "\t" + str(ciudades) + "\t" + str(años[0]))
+                                print (int(precios) + "\t"+ str(1) + "\t" + str(ciudades) + "\t" + str(años[0]))
