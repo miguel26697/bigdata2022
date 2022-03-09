@@ -6,8 +6,7 @@ for line in sys.stdin:
         precios = None
         ciudades = None
         fechas = None
-        if datos[1] != "Price":
-                precios = datos[1]
+        
         if datos[6] != "Town/City":
                 ciudades = datos[6]
         if datos[2] != "Date of Transfer":
