@@ -11,4 +11,4 @@ for line in sys.stdin:
 ordenados = sorted(current_precio)
 
 for i in ordenados:
-    print(f"{key}\t{año}\t{ordenados}")
+    print(str(key)+"\t"+str(año)+"\t"+str(i))
