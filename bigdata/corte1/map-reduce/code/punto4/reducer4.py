@@ -8,7 +8,7 @@ for line in sys.stdin:
     value = int(value)
     precio = int(precio)
     current_precio.append(precio)
-ordenados = sorted(current_precio)
 
-for i in ordenados:
-    print(str(key)+"\t"+str(año)+"\t"+str(i))
+
+for i in sorted(current_precio):
+    print(str("STAMFORD")+"\t"+str("2015")+"\t"+str(i))
