@@ -9,7 +9,8 @@ for line in sys.stdin:
         precios = datos[1]
     if datos[2] != "Date of Transfer":
         fechas = datos[2]
+    
     if precios != None  and fechas != None:
         años = fechas.split("-")
-        print(str(años[0]) + "\t" + str(años[1]) + "\t" + str(1))
+        print(str(años[0]) + "\t" + str(años[1]) + "\t" + str(precios))
 

@@ -13,7 +13,9 @@ for line in sys.stdin:
         if datos[2] != "Date of Transfer":
                 fechas = datos[2]
 
-        if precios != None and ciudades != None and fechas != None:
+        if ciudades != None and fechas != None:
                 años = fechas.split("-")
                 if años [0] == "2015" and ciudades == "STAMFORD":
-                  print (str(precios) + "\t"+ str(1) + "\t" + str(ciudades) + "\t" + str(años[0]))
+                        if datos[1] != "Price":
+                                precios = datos[1]
+                                print (str(precios) + "\t"+ str(1) + "\t" + str(ciudades) + "\t" + str(años[0]))
