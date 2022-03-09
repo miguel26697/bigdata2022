@@ -1,10 +1,13 @@
 import sys
 
-current_key = None
+current_precios = []
 
 
 for line in sys.stdin:
     precios, value, key, año = line.split("\t")
     value = int(value)
-    precio = int(precio)
-    print(str(precio)+"\t"+str(key)+"\t"+str(año))
+    precios = int(precios)
+    current_precios.append(precios)
+
+for i in sorted(current_precios):
+    print(str(i)+"\t"+str(key)+"\t"+str(año))
