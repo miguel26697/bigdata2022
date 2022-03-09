@@ -17,4 +17,5 @@ for line in sys.stdin:
                 if años [0] == "2015" and ciudades == "STAMFORD":
                         if datos[1] != "Price":
                                 precios = datos[1]
+                                precios = int(precios)
                                 print (str(precios) + "\t"+ str(1) + "\t" + str(ciudades) + "\t" + str(años[0]))
