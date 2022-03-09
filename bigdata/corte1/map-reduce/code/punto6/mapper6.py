@@ -1,7 +1,6 @@
 import sys
 
-condados = []
-ciudades = []
+
 for line in sys.stdin:
     datos = line.split(",")
     condados = None

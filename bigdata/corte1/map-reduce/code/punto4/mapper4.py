@@ -1,8 +1,6 @@
 import sys
 
-precios=[]
-ciudades = []
-fechas = []
+
 for line in sys.stdin:
         datos = line.split(",")
         precios = None
