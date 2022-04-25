@@ -1,6 +1,6 @@
 import sys
 
 for line in sys.stdin:
-    condado, value = line.split("\t")
+    condado, value = line.split("\t" , 1 )
     value = int(value)
-    print(str(value)+"\t"+str(condado) + "\t" + str(1))
+    print(str(value)+"\t"+ str(1))

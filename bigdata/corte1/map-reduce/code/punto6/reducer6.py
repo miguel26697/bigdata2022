@@ -3,21 +3,20 @@ import sys
 current_key = None
 current_value = 0
 current_town = None
+
+ciudades ={}
 for line in sys.stdin:
-        condado, ciudad, value = line.split("\t")
-        value = int(value)
-        if current_key == None:
-          current_key = condado
-          current_town = ciudad
-
-        if current_key == condado:
-          if current_town != ciudad:
-              current_value += value
-
+        key, value = line.split("\t",1)
+        ciudad, count = value.split(',',1)
+        count = int(count)
+        if key == current_key:
+           if ciudad not in ciudades:
+            ciudades[ciudad] = True
+            current_value += count
         else:
-           print (str(current_key) + "\t" + str(current_value))
-
-           current_key = condado
-           current_value = value
-
-print (str(current_key) + "\t" + str(current_value))
+          if current_key:
+            print (str(current_key) + "\t" + str(current_value))
+          current_key = key
+          current_value = count
+if key == current_key:
+  print (str(current_key) + "\t" + str(current_value))
