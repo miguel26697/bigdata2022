@@ -1,7 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
+import time
 
 
+def handler(event, context):
+    localtime=time.localtime()
+    
 
 def scrapingBBC():
     r = requests.get('https://www.bbc.com/mundo')
