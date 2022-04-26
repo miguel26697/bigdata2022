@@ -14,7 +14,7 @@ def handler(event, context):
     fileBBC="/tmp/BBC.html"
     f = open(fileBBC,"w")
     print("Saving file from BBC")
-    f.write(rCNN.text)
+    f.write(rBBC.text)
     f.close()
 
     print("Creating temporaly file...")
