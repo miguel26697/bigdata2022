@@ -1,12 +1,10 @@
 import boto3
 import requests
-from bs4 import BeautifulSoup
 import time
 
 def handler(event, context):
     localtime=time.localtime()
     rBBC = requests.get('https://www.bbc.com/mundo')
-
     rCNN = requests.get('https://cnnespanol.cnn.com/')
     
     
