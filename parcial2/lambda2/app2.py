@@ -8,12 +8,11 @@ def handler(event, context):
     s3 = boto3.resource('s3')
     content_object = s3.Object('scrapingnewspaper', 'headlines/raw/periodico=BBC/year='+str(localtime.tm_year)+'/month='+str(localtime.tm_mon)+'/day='+str(localtime.tm_mday)+'/pagina.html')
     file_content = content_object.get()['Body'].read()
-    print(file_content)
+    scrapingBBC(file_content)
     
 
-def scrapingBBC():
-    r = requests.get('https://www.bbc.com/mundo')
-    soup = BeautifulSoup(r.text, 'html.parser')
+def scrapingBBC(text):
+    soup = BeautifulSoup(text, 'html.parser')
     losDiv = soup.find_all("body")
     losLi = losDiv[0].find_all("li")
 
@@ -109,6 +108,7 @@ def scrapingBBC():
             link =("https://www.bbc.com"+cat4[i][0].get("href")) 
             links.append(link)
             categoriasgen.append("Hay Festival")
+
     for i in range(41,90):
         if cat5 [i] :
             if  (cat5 [i][0].getText()) != " Lee más sobre estos vínculos":
@@ -118,6 +118,8 @@ def scrapingBBC():
                 link=("https://www.bbc.com"+cat5 [i][0].get("href"))
                 links.append(link)
                 categoriasgen.append("Economia")
+    for noticias in zip(titulos,categoriasgen,links):
+        print("Titulo: "+noticias[0]+"----Categoria:  "+noticias[1]+"---Link:"+noticias[2])
 
 def scrapingCNN():
     r = requests.get('https://cnnespanol.cnn.com/')
