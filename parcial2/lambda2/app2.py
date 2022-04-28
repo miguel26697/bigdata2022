@@ -1,14 +1,30 @@
-import requests
 from bs4 import BeautifulSoup
 import time
 import boto3
+import requests
+import pandas as pd
 
 def handler(event, context):
-    localtime=time.localtime()
     s3 = boto3.resource('s3')
-    content_object = s3.Object('scrapingnewspaper', 'headlines/raw/periodico=BBC/year='+str(localtime.tm_year)+'/month='+str(localtime.tm_mon)+'/day='+str(localtime.tm_mday)+'/pagina.html')
-    file_content = content_object.get()['Body'].read()
-    scrapingBBC(file_content)
+    localtime=time.localtime()
+    paginaBBC = s3.Object('scrapingnewspaper', 'headlines/raw/periodico=BBC/year='+str(localtime.tm_year)+'/month='+str(localtime.tm_mon)+'/day='+str(localtime.tm_mday)+'/pagina.html')
+    paginaCNN = s3.Object('scrapingnewspaper', 'headlines/raw/periodico=CNN/year='+str(localtime.tm_year)+'/month='+str(localtime.tm_mon)+'/day='+str(localtime.tm_mday)+'/pagina.html')
+    file_contentBBC = paginaBBC.get()['Body'].read()
+    file_contentCNN = paginaCNN.get()['Body'].read()
+    dfBBC = scrapingBBC(file_contentBBC)
+    dfCNN = scrapingCNN(file_contentCNN)
+
+    put(dfBBC,"BBC",s3)
+    put(dfCNN,"CNN",s3)
+
+def put(df,periodico,s3):
+    csv= df.to_csv(index = False)
+    localtime=time.localtime()
+    s3object = s3.Object('scrapingnewspaper','news/final/periodico='+periodico+'/year='+str(localtime.tm_year)+'/month='+str(localtime.tm_mon)+'/day='+str(localtime.tm_mday)+'/noticias.csv')
+    s3object.put(
+    Body = csv
+    )
+    
     
 
 def scrapingBBC(text):
@@ -118,12 +134,18 @@ def scrapingBBC(text):
                 link=("https://www.bbc.com"+cat5 [i][0].get("href"))
                 links.append(link)
                 categoriasgen.append("Economia")
-    for noticias in zip(titulos,categoriasgen,links):
-        print("Titulo: "+noticias[0]+"----Categoria:  "+noticias[1]+"---Link:"+noticias[2])
 
-def scrapingCNN():
-    r = requests.get('https://cnnespanol.cnn.com/')
-    soup = BeautifulSoup(r.text, 'html.parser')
+
+    noticiasgen=[]
+    for noticias in zip(titulos,categoriasgen,links):
+        noticiasgen.append([noticias[0],noticias[1],noticias[2]])
+    
+    df = pd.DataFrame.from_records(noticiasgen,
+                               columns=['Titulo','Categoria', 'Link'])
+    return df
+
+def scrapingCNN(text):
+    soup = BeautifulSoup(text, 'html.parser')
     losDiv = soup.find_all("body")
     articles = losDiv[0].find_all("article")
     links=[]
@@ -145,3 +167,13 @@ def scrapingCNN():
             category.append(cat1.get("title"))
             titulos.append(tit1.get("title"))
             links.append(tit1.get("href"))
+
+    noticiasgen=[]
+
+    for noticias in zip(titulos,category,links):
+        noticiasgen.append([noticias[0],noticias[1],noticias[2]])
+    
+    df = pd.DataFrame.from_records(noticiasgen,
+                               columns=['Titulo','Categoria', 'Link'])
+
+    return df
