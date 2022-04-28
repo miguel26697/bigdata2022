@@ -8,7 +8,7 @@ def handler(event, context):
     rCNN = requests.get('https://cnnespanol.cnn.com/')
     
     put(rBBC,"BBC")
-
+    put(rCNN,"CNN")
     
 
 def put(r,periodico):
