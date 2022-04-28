@@ -7,7 +7,8 @@ def handler(event, context):
     localtime=time.localtime()
     s3 = boto3.resource('s3')
     content_object = s3.Object('scrapingnewspaper', 'headlines/raw/periodico=BBC/year='+str(localtime.tm_year)+'/month='+str(localtime.tm_mon)+'/day='+str(localtime.tm_mday)+'/pagina.html')
-    print(content_object)
+    file_content = content_object.get()
+    print(file_content)
     
 
 def scrapingBBC():
