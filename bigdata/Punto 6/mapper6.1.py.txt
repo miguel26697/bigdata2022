@@ -1,0 +1,6 @@
+import sys
+
+for line in sys.stdin:
+   condado, value = line.split("\t")
+   value = int(value)
+   print (f"{value}\t{condado}\t1")

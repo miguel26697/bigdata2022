@@ -1,0 +1,20 @@
+import sys
+
+current_key = None
+current_value = 0
+current_cantidad =  0
+for line in sys.stdin:
+    cantidad, condado, value = line.split("\t")
+    cantidad = int(cantidad)
+    value= int(value)
+    if current_key == None:
+        current_key = value
+        current_cantidad = cantidad
+    if current_cantidad == cantidad:
+       current_value += value
+    else:
+       print (f"{current_value}\t{current_cantidad}")
+       current_value = value
+       current_cantidad = cantidad
+
+print (f"{current_value}\t{current_cantidad}")

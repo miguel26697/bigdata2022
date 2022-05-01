@@ -8,7 +8,7 @@
         "apigateway_enabled": false,
         "keep_warm":false,
         "manage_roles":false,
-        "s3_bucket": "zappa-gly7axru2",
+        "s3_bucket": "resultsnewspaper",
         "events": [{
             "function": "app2.handler",
             "event_source": {

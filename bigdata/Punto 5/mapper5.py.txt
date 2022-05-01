@@ -1,0 +1,22 @@
+import sys
+
+precios=[]
+fechas = []
+for line in sys.stdin:
+        datos = line.split(",")
+        precios.append(datos[1])
+        fechas.append(datos[2])
+
+fechas.pop(0)
+precios.pop(0)
+
+años = []
+meses = []
+
+for date in fechas:
+        dates = date.split("-")
+        años.append(dates[0])
+        meses.append(dates[1])
+
+for año, mes in zip(años,meses):
+         print (f"{año} \t {mes} \t {1}")

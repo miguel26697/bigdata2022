@@ -20,7 +20,7 @@ def handler(event, context):
 def put(df,periodico,s3):
     csv= df.to_csv(index = False)
     localtime=time.localtime()
-    s3object = s3.Object('scrapingnewspaper','news/final/periodico='+periodico+'/year='+str(localtime.tm_year)+'/month='+str(localtime.tm_mon)+'/day='+str(localtime.tm_mday)+'/noticias.csv')
+    s3object = s3.Object('resultsnewspaper','news/final/periodico='+periodico+'/year='+str(localtime.tm_year)+'/month='+str(localtime.tm_mon)+'/day='+str(localtime.tm_mday)+'/noticias.csv')
     s3object.put(
     Body = csv
     )
