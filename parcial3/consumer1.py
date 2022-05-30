@@ -1,8 +1,6 @@
 from pyspark.sql import SparkSession
 import pyspark.sql.functions as f
 
-def entrega():
-    print("¡Entrego!")
 
 spark = SparkSession \
     .builder \
@@ -20,13 +18,12 @@ df=lines.withColumn("Price", f.conv(f.col("value"), 16, 16).cast("bigint"))
 
 
 df2 = df.select("Price")
-dfPrice=df2.select(f.min("Price").alias("minPrice"),
-                    f.max("Price").alias("maxPrice"))
+dfPrice=df2.select(f.min("Price").alias("PrecioMin"),
+                    f.max("Price").alias("PrecioMax"))
 
 
 query = dfPrice \
     .writeStream \
-    .foreach(entrega)\
     .outputMode("complete") \
     .format("console") \
     .start()
